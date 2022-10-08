@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Taxi Price Prediction</title>
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+          rel="stylesheet" type='text/css'>
+
+    <meta name="viewport" content="width=device-width, intial-scale=1.0" />
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "poppins", sans-serif;
+        }
+        /* Text formatting to look good like arail font*/
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #d4cee9;
+            padding: 100px;
+        }
+        /* To bring whole body data in center*/
+
+        #flip {
+            border-color: #241a59;
+        }
+
+        .container {
+            position: relative;
+            top : -45px;
+            max-width: 1000px;
+            height: 479px;
+            width: 800px;
+            background: #fff;
+            padding: 40px 30px;
+            box-shadow: 0px 5px 10px rgb(0,0,0,0.2);
+            perspective: 2800px;
+        }
+            /* Center block - (having main data in main screeen) - background properties */
+
+            .container .cover {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                height: 100%;
+                width: 50%;
+                z-index: 98;
+                transition: all 1s ease;
+                transform-origin: left;
+                transform-style: preserve-3d;
+            }
+
+                .container .cover::before {
+                    content: '';
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    background: #6640dc;
+                    z-index: 100;
+                    opacity: 0.3;
+                }
+
+            .container #flip:checked ~ .cover {
+                transform: rotateY(-180deg);
+            }
+
+            .container .cover img {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                /*z-index : 12;*/
+                background-color: #265b4e;
+            }
+
+
+            .container form {
+                height: 100%;
+                width: 100%;
+                background: #fff;
+            }
+
+            .container .form-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+        /* This is to seperate two pages of your screen means t bring some space between them. */
+
+        .form-content .login-form,
+        .form-content .signup-form {
+            width: calc(100% / 2 - 55px);
+            /* baclground : red; */
+        }
+
+        form .form-content .title {
+            position: relative;
+            font-size: 24px;
+            font-weight: 800;
+            color: #241a59;
+            font-family: Algerian;
+        }
+
+            form .form-content .title:before {
+                content: '';
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                height: 3px;
+                width: 230px;
+                background: #241a59;
+            }
+
+
+
+        form .signup-form .title:before {
+            width: 20px;
+        }
+
+
+        form .form-content .input-boxes {
+            margin-top: 25px;
+        }
+
+        form .form-content .input-box {
+            display: flex;
+            align-items: center;
+            height: 50px;
+            width: 100%;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .form-content .input-box input {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+            padding: 0 30px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration-color: #241a59;
+            border-bottom: 2px solid rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+            .form-content .input-box input:focus,
+            .form-content .input-box input:valid {
+                border-color: #241a59;
+            }
+
+        .form-content .input-box i {
+            position: absolute;
+            color: #241a59;
+            font-size: 23px;
+        }
+
+        form .form-content .text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+            form .form-content .text a {
+                text-decoration: none;
+            }
+
+                form .form-content .text a:hover {
+                    text-decoration: underline;
+                }
+
+        form .form-content .button {
+            color: #fff;
+            margin-top: 40px;
+            width: 250px;
+            height: 50px;
+        }
+
+            /*#302b61*/
+            form .form-content .button input {
+                color: #fff;
+                background: #302b61;
+                border-radius: 6px;
+                padding: 0;
+                cursor: pointer;
+                transition: all 0.4s ease;
+            }
+
+            form .form-content .button .goback {
+                margin-top: -18px;
+                margin-left: 10px;
+                background: rgb(0,0,0,0.2);
+                border-radius: 6px;
+                padding: 0;
+                cursor: pointer;
+                transition: all 0.4s ease;
+            }
+
+            form .form-content .button input:hover {
+                background: #710cf5;
+            }
+
+        form .form-content label {
+            color: #5b13b9;
+            cursor: pointer;
+            transform: rotateY(-180deg);
+        }
+
+            form .form-content label:hover {
+                text-decoration: underline;
+            }
+
+
+        #placeh {
+            color: #808080;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <div class="container">
+
+        <input type="checkbox" id="flip" />
+
+        <div class="cover">
+            <div class="front">
+                
+            </div>
+
+        </div>
+
+
+        <form  action="/" method="post">
+            <div class="form-content">
+
+                <div class="login-form">
+                    <div class="title">TRIP Details</div>
+
+                    <div class="input-boxes">
+
+                        <div class="input-box">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" name="so_loc" placeholder="Enter  Source  Location" required />
+                        </div>
+
+                        <br>
+
+                        <div class="input-box">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" name="De_loc" placeholder="Enter  Destination  Location" required />
+                        </div>
+
+                        <br>
+
+                        <div class="input-box">
+                            <i class="fa fa-calendar"></i>
+                            <input id="placeh" name="date2time" type="datetime-local" onclick=myfun() placeholder="dd/mm/yy" required />
+                        </div>
+
+
+                        <script>
+
+                            function myfun() {
+                                document.getElementById('placeh').style.color = 'black';
+                                document.getElementById('placeh').style.backgroundColor = '#e6f2ff';
+                            }
+
+                        </script>
+
+
+                        <div class="button input-box">
+                            <input style="font-family:'Algerian';" type="submit" value="Search  Your  Ride" />
+                        </div>
+
+                        <br>
+
+                        <div class="text" align="center"><u><label for="flip">Switch -> Booking Details</label></u></div>
+
+                    </div>
+                </div>
+
+
+                <div class="login-form">
+                    <div class="title">Booking - Details</div>
+
+                    <div class="input-boxes">
+
+                        <div class="input-box">
+                            <i class="fa fa-dollar"></i>
+                            <input id="fare" type="text" placeholder="" required style="font-family: 'Algerian'; color: #241a59; " value="  Total  Fare =  {{total_fare}}" />
+                        </div>
+
+                        <br>
+
+                        <div class="input-box">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input id="dist" type="text" style="font-family: 'Algerian'; color: #241a59; " value="  Total  Distance = {{total_distance}}" />
+                        </div>
+                        <br>
+                        <div class="input-box">
+                            <i class="fas fa-clock"></i>
+                            <input id="time" type="text" style="font-family: 'Algerian'; color: #241a59; " value="  Total  Time =  {{total_time}}" />
+                        </div>
+                        <br><br>
+                        <div class="text" id="goback" align="center"><u><label for="flip">Find Your Next Ride Here</label></u></div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>
