@@ -88,11 +88,10 @@ def my_page():
         time = time_estimate(distance)
 
         input_model = np.array([1, source_lati, source_longi, Destination_lati, Destination_longi,
-                                year, month, day, Hours, minutes, distance],dtype=float)
+                                year, month, day, Hours, minutes, distance])
 
         input_model = input_model.reshape(1, -1)
 
-        print(input_model)
         total_fare = model.predict(input_model)
 
         print(total_fare)
@@ -111,5 +110,5 @@ def my_page():
 
 
 if __name__ == '__main__':
-    
-    app.run(debug=True)
+    from werkzeug.serving import run_simple
+    run_simple('localhost', 9000, app )
