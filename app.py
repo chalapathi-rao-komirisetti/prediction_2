@@ -88,7 +88,7 @@ def my_page():
         time = time_estimate(distance)
 
         input_model = np.array([1, source_lati, source_longi, Destination_lati, Destination_longi,
-                                year, month, day, Hours, minutes, distance])
+                                year, month, day, Hours, minutes, distance],dtype=float)
 
         input_model = input_model.reshape(1, -1)
 
